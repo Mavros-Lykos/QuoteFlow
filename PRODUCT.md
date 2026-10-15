@@ -4,7 +4,9 @@
 
 ## Platform
 
-web
+desktop-windows + web
+
+**v1 ship shape:** Windows desktop app (Tauri; local AI + AppData SQLite) is the product. The public website is marketing + a Standard/cloud **Try demo**. Mobile (Capacitor) is deferred.
 
 ## Users
 
@@ -50,9 +52,9 @@ Unlike cumbersome enterprise contractor software (ServiceTitan, Jobber) that cos
 
 ## Brand Commitments
 
-- **Name**: QuoteFlow AI
-- **Tagline**: Local AI Estimating & Proposal Engine for Independent Contractors. "3 hours → 8 minutes."
-- **Visual Tone**: Contractor Industrial meets High-Tech Precision. Deep slate/zinc dark mode, high-contrast amber/gold electric accents, clean typography (*Plus Jakarta Sans* and *Outfit*), with glassmorphism and clear visual hierarchy.
+- **Name**: QuoteFlow
+- **Tagline**: Describe the job. Send the estimate. ("3 hours → 8 minutes.")
+- **Visual Tone**: Warm paper backgrounds, safety-orange brand, ink navy text. Typography: *Bricolage Grotesque* (display) + *Inter* (UI). See `DESIGN.md`. No glassmorphism / model-badge hero.
 
 ## Evidence on Hand
 
