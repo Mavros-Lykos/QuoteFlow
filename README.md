@@ -1,13 +1,20 @@
-# QuoteFlow AI — Local AI Estimating & Proposal Engine
+# QuoteFlow — Describe the job. Send the estimate.
 
 > **Hacktoberfest 2026: Open-Source AI Challenge (Week 2 — Side Hustle)**  
-> *Contractor estimating: **3 hours → ~8 minutes**, with open-weight models and local-first privacy for client data.*
+> *Contractor estimating: **3 hours → ~8 minutes**. Windows desktop keeps data on the PC; the website demos the same UI in the browser.*
 
 [![Open-Source AI](https://img.shields.io/badge/Open--Source%20AI-Gemma%20%7C%20Llama%20%7C%20Qwen-f59e0b)](https://dev.to/challenges/hacktoberfest-week2-2026-10-12)
 [![Privacy](https://img.shields.io/badge/Privacy-Local--First%20LLM-10b981)](#privacy-model)
 [![License: MIT](https://img.shields.io/badge/License-MIT-3b82f6.svg)](LICENSE)
 
-**Specs:** [`SRS.md`](SRS.md) · **Product:** [`PRODUCT.md`](PRODUCT.md) · **Strategy:** [`idea_selection.md`](idea_selection.md) · **Open decisions:** [`DECISION_REVIEW.md`](DECISION_REVIEW.md)
+**Specs:** [`SRS.md`](SRS.md) · **Product:** [`PRODUCT.md`](PRODUCT.md) · **Design:** [`DESIGN.md`](DESIGN.md) · **Strategy:** [`idea_selection.md`](idea_selection.md) · **Decisions:** [`DECISION_REVIEW.md`](DECISION_REVIEW.md)
+
+### How to try it
+
+| Path | Who it’s for |
+|------|----------------|
+| **Download for Windows** (`/download`) | Real product — local AI, SQLite in `%APPDATA%\QuoteFlow` |
+| **Try it in your browser** (`/app`) | Judges / quick look — Standard (cloud) demo with a clear banner |
 
 ---
 
@@ -18,11 +25,12 @@ Independent tradespeople finish a physical workday, then spend 2.5–3.5 hours w
 ## What QuoteFlow does
 
 1. Voice or text job notes → itemized BOM (Materials, Labor, Equipment, Permits)
-2. **SerpApi** (optional key) grounds labor rates by ZIP; offline index otherwise
-3. **TabPFN calibration** suggests and **applies** a win-rate-aware total
-4. Open-weight LLM (Gemma 3 4B default via Ollama, or Groq) drafts the client proposal
-5. **Branded PDF** download + Temporal-style durable follow-ups (SQLite-persisted)
-6. **ElevenLabs** STT/TTS when keyed; browser speech fallback for readout
+2. Region-aware currency, tax name, and units (UI + LLM + PDF)
+3. **SerpApi** (optional key) grounds labor rates by ZIP; offline index otherwise
+4. **TabPFN calibration** suggests and **applies** a win-rate-aware total
+5. Open-weight LLM (Gemma 3 4B default via Ollama on desktop, or Groq Standard) drafts the client proposal
+6. **Branded PDF** + copy message / mailto send loop; local export & wipe
+7. **ElevenLabs** STT/TTS when keyed; browser speech fallback for readout
 
 ---
 
