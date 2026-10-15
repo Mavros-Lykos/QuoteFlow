@@ -11,6 +11,11 @@
 | 7 | **Tiger Data** | **G3 hybrid** — SQLite always + pgvector when `TIGER_DATA_CONNECTION_STRING` set | **Shipped** |
 | 8 | Metric 3h→8m | Positioning claim OK | Shipped |
 | 9 | Domain | Render free URL only (no .tech) | Locked |
+| 10 | **v1 product** | **Windows desktop (Tauri) + public website** (landing + Try demo). No accounts. | **Locked** |
+| 11 | **Mobile** | Capacitor / PWA / phone sync — **deferred** after desktop+web | Deferred |
+| 12 | **Data location** | Desktop: `%APPDATA%/QuoteFlow` SQLite + device prefs. Web demo: hosted API; banner required. | Locked |
+| 13 | **AI setup** | Desktop auto-prepares Ollama + `gemma3:4b`; Standard/online fallback if local fails | Locked |
+| 14 | **Code signing** | Document unsigned SmartScreen warning until a cert is available | Locked |
 
 ---
 
