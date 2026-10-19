@@ -7,7 +7,7 @@
 [![Privacy](https://img.shields.io/badge/Privacy-Local--First%20LLM-10b981)](#privacy-model)
 [![License: MIT](https://img.shields.io/badge/License-MIT-3b82f6.svg)](LICENSE)
 
-**Specs:** [`SRS.md`](SRS.md) · **Product:** [`PRODUCT.md`](PRODUCT.md) · **Design:** [`DESIGN.md`](DESIGN.md) · **Strategy:** [`idea_selection.md`](idea_selection.md) · **Decisions:** [`DECISION_REVIEW.md`](DECISION_REVIEW.md)
+**Specs:** [`SRS.md`](SRS.md) · **Product:** [`PRODUCT.md`](PRODUCT.md) · **Design:** [`DESIGN.md`](DESIGN.md) · **Ship checklist:** [`PRODUCTION_READY.md`](PRODUCTION_READY.md) · **DEV Challenge submit:** [`SUBMISSION_REVIEW.md`](SUBMISSION_REVIEW.md) · **Decisions:** [`DECISION_REVIEW.md`](DECISION_REVIEW.md)
 
 ### How to try it
 
