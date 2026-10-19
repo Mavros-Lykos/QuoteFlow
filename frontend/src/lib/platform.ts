@@ -1,8 +1,19 @@
-export const API_BASE: string =
-  (import.meta as unknown as { env?: Record<string, string> }).env?.VITE_API_BASE || 'http://localhost:8000/api';
+const env = (import.meta as unknown as { env?: Record<string, string> }).env;
 
-export const DOWNLOAD_URL: string =
-  (import.meta as unknown as { env?: Record<string, string> }).env?.VITE_DOWNLOAD_URL || '';
+export const API_BASE: string = env?.VITE_API_BASE || 'http://localhost:8000/api';
+
+/**
+ * Direct link to the Windows installer (.exe), usually a GitHub Release asset.
+ * Set at build time: VITE_DOWNLOAD_URL=https://github.com/.../releases/download/v0.1.0/QuoteFlow_0.1.0_x64-setup.exe
+ */
+export const DOWNLOAD_URL: string = env?.VITE_DOWNLOAD_URL || '';
+
+/**
+ * Fallback when no specific .exe URL is set — open the Releases page instead.
+ * Example: https://github.com/YOUR_USER/quoteflow/releases/latest
+ */
+export const RELEASES_URL: string =
+  env?.VITE_RELEASES_URL || 'https://github.com/Mavros-Lykos/QuoteFlow/releases/latest';
 
 /** True when running inside the Tauri desktop shell (local-first build). */
 export const isDesktop: boolean =

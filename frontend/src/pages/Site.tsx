@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { Check, Download, Lock, Mic, Monitor, Smartphone } from 'lucide-react';
-import { DOWNLOAD_URL } from '../lib/platform';
+import { DOWNLOAD_URL, RELEASES_URL } from '../lib/platform';
 
 export const SiteLayout: React.FC = () => (
   <div className="site">
@@ -170,12 +170,14 @@ export const DownloadPage: React.FC = () => (
           <Download size={20} aria-hidden /> Download installer
         </a>
       ) : (
-        <button type="button" className="btn btn--secondary btn--lg" disabled>
-          Installer coming soon
-        </button>
+        <a className="btn btn--primary btn--lg" href={RELEASES_URL} target="_blank" rel="noreferrer">
+          <Download size={20} aria-hidden /> Get Windows installer
+        </a>
       )}
       <p className="muted" style={{ marginTop: 12, fontSize: '0.9rem' }}>
-        Early builds may be unsigned. Windows SmartScreen can warn — choose “More info” → “Run anyway” only for installers from this site or our GitHub Releases.
+        {DOWNLOAD_URL
+          ? 'Early builds may be unsigned. Windows SmartScreen can warn — choose “More info” → “Run anyway” only for installers from this site or our GitHub Releases.'
+          : 'Opens GitHub Releases. After CI publishes a tag (v0.1.0), the .exe appears there. Set VITE_DOWNLOAD_URL on Render for a one-click download.'}
       </p>
     </div>
 

@@ -1,7 +1,7 @@
 import { invoke } from '@tauri-apps/api/core';
 import { listen, type UnlistenFn } from '@tauri-apps/api/event';
 import { getCurrentWindow } from '@tauri-apps/api/window';
-import { API_BASE, DOWNLOAD_URL, isDesktop } from './platform';
+import { API_BASE, DOWNLOAD_URL, RELEASES_URL, isDesktop } from './platform';
 
 export interface AiStatus {
   ollama_on_path: boolean;
@@ -57,12 +57,11 @@ export async function setUseOnlineMode(enabled: boolean): Promise<void> {
 
 export async function openReleases(): Promise<void> {
   if (!isDesktop) {
-    const url = DOWNLOAD_URL || 'https://github.com/hacktoberfest26/quoteflow/releases';
-    window.open(url, '_blank', 'noopener,noreferrer');
+    window.open(DOWNLOAD_URL || RELEASES_URL, '_blank', 'noopener,noreferrer');
     return;
   }
   try {
-    await invoke('open_releases', { url: DOWNLOAD_URL || null });
+    await invoke('open_releases', { url: DOWNLOAD_URL || RELEASES_URL });
   } catch {
     /* ignore */
   }

@@ -50,6 +50,8 @@ services:
       # After first deploy, set this to https://<your-backend-service>.onrender.com/api
       - key: VITE_API_BASE
         sync: false
-      # Optional: installer URL for /download CTA
+      # Optional: direct .exe from GitHub Release (see DOWNLOAD_URL.md)
       - key: VITE_DOWNLOAD_URL
         sync: false
+      - key: VITE_RELEASES_URL
+        value: "https://github.com/Mavros-Lykos/QuoteFlow/releases/latest"
