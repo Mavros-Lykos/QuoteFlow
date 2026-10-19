@@ -36,14 +36,12 @@ services:
       - key: FOLLOWUP_EXPIRY_SECONDS
         value: "604800"
 
-  # Frontend Static Site
+  # Frontend Static Site (no region/plan — Render forbids them on static sites)
   - type: web
     name: quoteflow-frontend
-    env: static
-    region: oregon
-    plan: free
+    runtime: static
     buildCommand: "cd frontend && npm install && npm run build"
-    staticPublishPath: "./frontend/dist"
+    staticPublishPath: ./frontend/dist
     routes:
       - type: rewrite
         source: /*
