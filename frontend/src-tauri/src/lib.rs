@@ -102,6 +102,8 @@ fn spawn_python_backend(data_dir: &Path, backend_dir: &Path) -> Result<BackendPr
     }
 
     let data = data_dir.to_string_lossy().to_string();
+    let online = read_settings().use_online_mode;
+    let provider = if online { "groq" } else { "ollama" };
     let mut last_err = String::from("No Python interpreter found (tried python, py)");
 
     for py in ["python", "py"] {
@@ -110,6 +112,7 @@ fn spawn_python_backend(data_dir: &Path, backend_dir: &Path) -> Result<BackendPr
             .current_dir(backend_dir)
             .env("QUOTEFLOW_DATA_DIR", &data)
             .env("QUOTEFLOW_SEED", "0")
+            .env("DEFAULT_MODEL_PROVIDER", provider)
             .stdout(Stdio::null())
             .stderr(Stdio::piped())
             .spawn()
@@ -128,9 +131,12 @@ fn try_spawn_sidecar(app: &AppHandle, data_dir: &Path) -> Result<BackendProcess,
         .shell()
         .sidecar("quoteflow-api")
         .map_err(|e| e.to_string())?;
+    let online = read_settings().use_online_mode;
+    let provider = if online { "groq" } else { "ollama" };
     let (_rx, child) = sidecar
         .env("QUOTEFLOW_DATA_DIR", data)
         .env("QUOTEFLOW_SEED", "0")
+        .env("DEFAULT_MODEL_PROVIDER", provider)
         .spawn()
         .map_err(|e| e.to_string())?;
     Ok(BackendProcess::Sidecar(child))
