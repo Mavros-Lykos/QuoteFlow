@@ -1,141 +1,138 @@
 # QuoteFlow — Describe the job. Send the estimate.
 
-> **Hacktoberfest 2026: Open-Source AI Challenge (Week 2 — Side Hustle)**  
-> *Contractor estimating: **3 hours → ~8 minutes**. Windows desktop keeps data on the PC; the website demos the same UI in the browser.*
+> **Hacktoberfest 2026 · Open-Source AI Challenge · Week 2 — Side Hustle**  
+> Contractor estimating: **3 hours → ~8 minutes**. Open-weight Gemma on the desktop; hosted demo on Render with Groq Gemma when the laptop can’t run a local model.
 
-[![Open-Source AI](https://img.shields.io/badge/Open--Source%20AI-Gemma%20%7C%20Llama%20%7C%20Qwen-f59e0b)](https://dev.to/challenges/hacktoberfest-week2-2026-10-12)
-[![Privacy](https://img.shields.io/badge/Privacy-Local--First%20LLM-10b981)](#privacy-model)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Render-46E3B7?logo=render)](https://quoteflow-frontend-qlqc.onrender.com)
+[![Demo Video](https://img.shields.io/badge/Demo-YouTube-FF0000?logo=youtube)](https://www.youtube.com/watch?v=QWjo5eLsmtM)
+[![Open-Source AI](https://img.shields.io/badge/Open--Source%20AI-Gemma%20%7C%20Groq-f59e0b)](https://dev.to/challenges/hacktoberfest-week2-2026-10-12)
 [![License: MIT](https://img.shields.io/badge/License-MIT-3b82f6.svg)](LICENSE)
 
-**Specs:** [`SRS.md`](SRS.md) · **Product:** [`PRODUCT.md`](PRODUCT.md) · **Design:** [`DESIGN.md`](DESIGN.md) · **Ship checklist:** [`PRODUCTION_READY.md`](PRODUCTION_READY.md) · **DEV Challenge submit:** [`SUBMISSION_REVIEW.md`](SUBMISSION_REVIEW.md) · **Decisions:** [`DECISION_REVIEW.md`](DECISION_REVIEW.md)
+| | |
+|--|--|
+| **Live demo** | [quoteflow-frontend-qlqc.onrender.com](https://quoteflow-frontend-qlqc.onrender.com) |
+| **API** | [quoteflow-backend-q60x.onrender.com](https://quoteflow-backend-q60x.onrender.com/api/health) |
+| **Demo video** | [YouTube walkthrough](https://www.youtube.com/watch?v=QWjo5eLsmtM) |
+| **Repo** | [Mavros-Lykos/QuoteFlow](https://github.com/Mavros-Lykos/QuoteFlow) |
 
-### How to try it
-
-| Path | Who it’s for |
-|------|----------------|
-| **Download for Windows** (`/download`) | Real product — local AI, SQLite in `%APPDATA%\QuoteFlow` |
-| **Try it in your browser** (`/app`) | Judges / quick look — Standard (cloud) demo with a clear banner |
+**Docs:** [PRODUCT](PRODUCT.md) · [DESIGN](DESIGN.md) · [PRODUCTION_READY](PRODUCTION_READY.md) · [SUBMISSION](SUBMISSION_REVIEW.md) · [PARTNER KEYS](PARTNER_KEYS_SETUP.md) · [DECISIONS](DECISION_REVIEW.md)
 
 ---
 
-## The problem
+## Demo video
 
-Independent tradespeople finish a physical workday, then spend 2.5–3.5 hours writing quotes. Slow quotes lose jobs; rushed quotes destroy margins. Client addresses and pricing strategy should not be dumped into generic cloud chatbots.
+[![QuoteFlow demo](https://img.youtube.com/vi/QWjo5eLsmtM/maxresdefault.jpg)](https://www.youtube.com/watch?v=QWjo5eLsmtM)
 
-## What QuoteFlow does
+*Click the thumbnail → full walkthrough on YouTube.*
+
+**Try it yourself (judges):** open the [live demo](https://quoteflow-frontend-qlqc.onrender.com) → **Try it in your browser** → complete Welcome → create a sample plumbing estimate → Send / PDF.
+
+---
+
+## Screenshots
+
+### Landing
+
+![QuoteFlow landing](docs/screenshots/01-landing.png)
+
+### First-run setup (region-aware — India / INR / GST)
+
+![Welcome business](docs/screenshots/02-welcome-business.png)
+
+![Welcome region India](docs/screenshots/03-welcome-region-india.png)
+
+![Ready](docs/screenshots/04-welcome-ready.png)
+
+### Voice-first new estimate
+
+![Describe the job](docs/screenshots/05-new-estimate-job.png)
+
+![Review and create](docs/screenshots/06-review-create.png)
+
+### Generated estimate + send
+
+![Estimate detail INR](docs/screenshots/07-estimate-detail.png)
+
+![Send to customer](docs/screenshots/09-send-sheet.png)
+
+---
+
+## Who pays for this?
+
+Solo plumbers, electricians, HVAC techs, and remodelers. They lose jobs when the quote lands late, and they lose evenings writing spreadsheets. QuoteFlow is a **side hustle tool they would actually pay for**: faster bids, professional PDFs, and client addresses that don’t need to be pasted into a generic cloud chatbot.
+
+---
+
+## Why open innovation matters
+
+- **Desktop:** Ollama + **Gemma 3 4B** — job notes can stay on the PC after setup.
+- **Web demo / weak laptops:** **Groq** runs **open-weight Gemma** with customer PII redacted before the cloud call.
+- Not locked to one closed proprietary model for the core estimating path — swap models, run offline when hardware allows, keep costs predictable for a one-person trade business.
+
+Related community builds this week (same Side Hustle prompt, different niches): [FreelanceShield](https://dev.to/robinamirbahar/freelanceshield-ai-local-open-weight-scope-creep-detector-tabpfn-invoice-risk-forecaster-83k), [PocketLedger](https://dev.to/t7b5u/pocketledger-ai-how-local-gemma-2b-stops-freelancers-from-leaking-client-invoices-to-cloud-ai-apis-2enm), [QuoteForge](https://dev.to/paynemuse/quoteforge-messy-job-notes-customer-ready-quotes-powered-by-a-local-open-weight-model-39f4).
+
+---
+
+## What it does
 
 1. Voice or text job notes → itemized BOM (Materials, Labor, Equipment, Permits)
-2. Region-aware currency, tax name, and units (UI + LLM + PDF)
-3. **SerpApi** (optional key) grounds labor rates by ZIP; offline index otherwise
-4. **TabPFN calibration** suggests and **applies** a win-rate-aware total
-5. Open-weight LLM (Gemma 3 4B default via Ollama on desktop, or Groq Standard) drafts the client proposal
-6. **Branded PDF** + copy message / mailto send loop; local export & wipe
-7. **ElevenLabs** STT/TTS when keyed; browser speech fallback for readout
+2. Region-aware currency, tax, and units (UI + LLM + PDF) — e.g. **INR + GST 18%**
+3. **SerpApi** (when keyed) grounds labor rates; otherwise a regional index
+4. **TabPFN-style calibration** adjusts the suggested total
+5. Open-weight LLM drafts the customer proposal
+6. Send loop: copy SMS/WhatsApp text, mailto, branded PDF
+7. **ElevenLabs** STT/TTS when keyed; browser speech fallback
+8. **Tiger Data** hybrid memory (SQLite always; pgvector when `TIGER_DATA_CONNECTION_STRING` connects)
+9. PWA install banner on the web demo; Windows Tauri shell for the full product
 
 ---
 
 ## Privacy model
 
-| Data | Local Ollama | Groq cloud | SerpApi / ElevenLabs |
-|------|--------------|------------|----------------------|
+| Data | Local Ollama | Groq (web demo) | SerpApi / ElevenLabs |
+|------|--------------|-----------------|----------------------|
 | Client name / address / phone | Stays on device | **Redacted** before send | Not sent (voice audio only for STT) |
 | Job scope / trade | On device | Sent (sanitized) | ZIP + trade for market search |
 | Quote history / margins | SQLite on device | Not uploaded | Not uploaded |
 
-**“Local-first”** means the **LLM path for crown-jewel data** can run fully offline. Market research and voice are optional cloud tools — they are not claimed as air-gapped.
+---
+
+## Partner stack (this hosted demo)
+
+| Partner | Role on live demo |
+|---------|-------------------|
+| **Gemma** | Open-weight model via Groq (`DEFAULT_MODEL_PROVIDER=groq`) |
+| **Render** | Frontend + FastAPI hosting |
+| **TabPFN path** | Pricing calibration applied to every quote total |
+| **SerpApi** | Live benchmarks when `SERPAPI_API_KEY` is set |
+| **ElevenLabs** | Voice STT/TTS when `ELEVENLABS_API_KEY` is set |
+| **Tiger Data** | Job memory hybrid — set `TIGER_DATA_CONNECTION_STRING` (see [PARTNER_KEYS_SETUP](PARTNER_KEYS_SETUP.md)); SQLite fallback if connect fails |
+| **Mastra** | Optional sidecar in [`mastra/`](mastra/) |
+| Sentry | Optional — `SENTRY_DSN` when configured |
+
+Skipped on purpose: Backboard, Temporal Cloud, .tech domain.
 
 ---
 
-## Partner status (honest)
+## Quickstart (local)
 
-| Partner | Status | Notes |
-|---------|--------|-------|
-| Gemma | **Live** | Default `gemma3:4b`; Power `gemma2:9b`; Groq Gemma for hosted demos |
-| TabPFN | **Partial → Live path** | Applied to quote totals; Prior Labs API when keyed, else local tabular calibration |
-| SerpApi | **Partial → Live path** | Parses $/hr from results when possible; always injects rates into agent |
-| ElevenLabs | **Live when keyed** | STT + TTS endpoints; empty transcript without key |
-| Temporal | **Durable (SQLite)** | Follow-ups survive restart; Temporal SDK attach via `TEMPORAL_ENABLED` |
-| Tiger Data | **G3 hybrid** | SQLite always + **pgvector** upsert/search when `TIGER_DATA_CONNECTION_STRING` is set (`GET /api/memory/status`) |
-| Sentry | **Live when DSN set** | Agent step spans on quote pipeline |
-| Render | **Configured** | `render.yaml` uses **Groq** (set `GROQ_API_KEY` secret), not silent mock |
-| Mastra | **Live (sidecar)** | Agent + workflow in [`mastra/`](mastra/) orchestrating FastAPI tools |
-| Backboard | **Skipped** | Not using |
-| Temporal | **Skipped** | Free-tier focus; simple local follow-up reminders only (not Temporal Cloud) |
-| .tech Domains | **Skipped** | Deploy on Render free URL (`*.onrender.com`) |
-
----
-
-## Quickstart
-
-### Prerequisites
-- Node.js 18+
-- Python 3.10+
-- Optional: [Ollama](https://ollama.com) — `ollama pull gemma3:4b`
-- Optional: Groq API key for cloud demos
-
-### Backend
 ```bash
+# Backend (Groq if you can’t run Ollama)
 cd backend
 python -m pip install -r requirements.txt
-cp .env.example .env
+cp .env.example .env   # set GROQ_API_KEY, DEFAULT_MODEL_PROVIDER=groq
 python main.py
-```
-API: `http://127.0.0.1:8000` · Docs: `/docs`
 
-### Frontend
-```bash
-cd frontend
+# Frontend
+cd ../frontend
 npm install
 npm run dev
 ```
-UI: `http://localhost:5173`
 
-### Desktop (Tauri 2 — Windows)
-
-Local-first shell lives under `frontend/src-tauri/` (Vite + Tauri layout). Data is stored under `%APPDATA%\QuoteFlow`.
-
-```bash
-cd frontend
-npm install
-npm run tauri:dev      # spawns backend via Python from ../backend
-npm run tauri:build    # NSIS installer (requires Rust toolchain)
-```
-
-Optional offline backend sidecar (PyInstaller):
-
-```powershell
-.\scripts\build-sidecar.ps1
-```
-
-Then rebuild with `npm run tauri:build`. Without the sidecar, release builds fall back to spawning `python main.py` when Python is on PATH.
-
-For production builds pointed at a hosted API:
-```bash
-# frontend/.env.production
-VITE_API_BASE=https://YOUR-BACKEND.onrender.com/api
-```
-
-### Render (free default domain — no .tech required)
-1. Blueprint from `render.yaml` → you get `https://quoteflow-frontend.onrender.com` style URLs
-2. Set secret `GROQ_API_KEY` on the backend service (required for hosted LLM)
-3. Optionally SerpApi / ElevenLabs / Sentry / TabPFN keys
-4. Set frontend `VITE_API_BASE` at build time to `https://<backend-service>.onrender.com/api`
-5. Mastra Studio: run locally (`cd mastra && npm run dev`) for partner screenshots; optional second Render service later
-
----
-
-## Model tiers (contractor hardware)
-
-| Tier | RAM | Model |
-|------|-----|-------|
-| Lite | ≤5 GB | `gemma3:1b` |
-| **Standard (default)** | 6–10 GB | **`gemma3:4b`** |
-| Power | 12 GB+ | `gemma2:9b` / `qwen2.5:7b` |
-| Cloud demo | any | Groq open-weight Gemma / Llama |
-
-Browser WebGPU tier is documented in SRS as future — not required for v1.
+Desktop: `cd frontend && npm run tauri:dev` — see [DESKTOP.md](DESKTOP.md) and [DOWNLOAD_URL.md](DOWNLOAD_URL.md).
 
 ---
 
 ## License
-MIT. Built for Hacktoberfest 2026.
+
+MIT · Built for Hacktoberfest 2026.
