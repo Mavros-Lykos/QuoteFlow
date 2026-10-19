@@ -4,6 +4,7 @@ import { Home, FileText, Users, Settings, Plus, Mic, X } from 'lucide-react';
 import { useApp } from '../lib/app-context';
 import { isDesktop } from '../lib/platform';
 import { Button } from './ui';
+import { InstallPwa } from './InstallPwa';
 
 const linkClass = ({ isActive }: { isActive: boolean }) => `nav__link ${isActive ? 'is-active' : ''}`;
 const bottomClass = ({ isActive }: { isActive: boolean }) => (isActive ? 'is-active' : '');
@@ -56,6 +57,7 @@ export const AppShell: React.FC = () => {
       </aside>
 
       <div className="main">
+        <InstallPwa />
         {showDemo && (
           <div className="banner" role="note">
             <div className="banner__text">
